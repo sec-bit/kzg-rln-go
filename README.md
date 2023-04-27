@@ -14,12 +14,12 @@ Follow the instructions below to set up the project and run the provided example
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/your-username/rln-on-kzg-golang.git
+git clone https://github.com/sec-bit/kzg-rln-go.git
 ```
 
 2. Navigate to the project directory:
 ```bash
-cd rln-go
+cd kzg-rln-go
 ```
 
 ### Running Version A
@@ -27,5 +27,6 @@ cd rln-go
 To run the Version A example, execute the following command:
 
 ```bash
-go run . cmd/VersionA/main.go
+cd cmd/VersionA
+go run .
 ```
