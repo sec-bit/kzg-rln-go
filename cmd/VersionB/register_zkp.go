@@ -10,7 +10,7 @@ const (
 )
 
 // Define the circuit
-type zkCircuit struct {
+type registerCircuit struct {
 	// PublicInput  frontend.Variable
 	// N            frontend.Variable
 	// FAlpha       frontend.Variable
@@ -22,7 +22,7 @@ type zkCircuit struct {
 }
 
 // Define and implement the constraints
-func (circuit *zkCircuit) Define(api frontend.API) error {
+func (circuit *registerCircuit) Define(api frontend.API) error {
 	// Constraint 1: f(0) = private key
 	api.Println(circuit.PrivateKey)
 	api.Println(circuit.Coefficients[0])

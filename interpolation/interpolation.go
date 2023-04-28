@@ -5,7 +5,7 @@ import (
 
 	"github.com/sec-bit/kzg-rln-go/types"
 
-	"github.com/consensys/gnark-crypto/ecc/bls12-381/fr"
+	"github.com/consensys/gnark-crypto/ecc/bn254/fr"
 )
 
 func fromString(s string) *fr.Element {

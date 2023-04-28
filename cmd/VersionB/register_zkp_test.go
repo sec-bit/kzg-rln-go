@@ -7,9 +7,9 @@ import (
 	"github.com/sec-bit/kzg-rln-go/keypair"
 
 	"github.com/consensys/gnark-crypto/ecc"
-	"github.com/consensys/gnark-crypto/ecc/bls12-381/fr"
-	"github.com/consensys/gnark-crypto/ecc/bls12-381/fr/kzg"
-	"github.com/consensys/gnark-crypto/ecc/bls12-381/fr/mimc"
+	"github.com/consensys/gnark-crypto/ecc/bn254/fr"
+	"github.com/consensys/gnark-crypto/ecc/bn254/fr/kzg"
+	"github.com/consensys/gnark-crypto/ecc/bn254/fr/mimc"
 	"github.com/consensys/gnark/backend"
 	"github.com/consensys/gnark/test"
 )
@@ -24,7 +24,7 @@ func TestMembershipGroth16(t *testing.T) {
 	// commitment --> server
 	// kzg.Verify(commitment, opening, hash, srs)
 	// zkp.Verify(pi, hash, f(hash))
-	// register with hashPK
+	// register with hashPK, this is also used as nullifier
 	// slash with proof of pk avoid interpolating
 
 	const srsSize = 230
@@ -32,8 +32,8 @@ func TestMembershipGroth16(t *testing.T) {
 
 	assert := test.NewAssert(t)
 
-	var circuit zkCircuit
-	var assign zkCircuit
+	var circuit registerCircuit
+	var assign registerCircuit
 
 	poly := keypair.RandomPolynomial(DEGREE)
 	_, keyPairProof := keypair.GenerateCommitmentAndKeyPairProof(poly, srs)

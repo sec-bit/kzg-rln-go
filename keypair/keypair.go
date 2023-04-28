@@ -4,10 +4,9 @@ import (
 	"log"
 	"math/big"
 
-	bls12381 "github.com/consensys/gnark-crypto/ecc/bls12-381"
-	"github.com/consensys/gnark-crypto/ecc/bls12-381/fr"
-	"github.com/consensys/gnark-crypto/ecc/bls12-381/fr/kzg"
-	"github.com/davecgh/go-spew/spew"
+	"github.com/consensys/gnark-crypto/ecc/bn254"
+	"github.com/consensys/gnark-crypto/ecc/bn254/fr"
+	"github.com/consensys/gnark-crypto/ecc/bn254/fr/kzg"
 )
 
 func RandomPolynomial(size int) []fr.Element {
@@ -27,9 +26,10 @@ func pRandomPolynomial(size int) []fr.Element {
 }
 
 type KeyPairProof struct {
-	H              bls12381.G1Affine
+	H              bn254.G1Affine
 	PrivateKey     fr.Element
-	PublicKeyG1Jac bls12381.G1Jac
+	PublicKeyG1Aff bn254.G1Affine
+	PublicKeyG2Aff bn254.G2Affine
 }
 
 func GenerateCommitmentAndKeyPairProof(poly []fr.Element, srs *kzg.SRS) (kzg.Digest, *KeyPairProof) {
@@ -53,14 +53,17 @@ func GenerateCommitmentAndKeyPairProof(poly []fr.Element, srs *kzg.SRS) (kzg.Dig
 	privateKey := new(big.Int)
 	proof.ClaimedValue.BigInt(privateKey)
 
-	publicKey := new(bls12381.G1Jac)
-	publicKey.ScalarMultiplicationAffine(&srs.G1[0], privateKey)
-	spew.Dump(publicKey)
+	publicKey := new(bn254.G1Affine)
+	publicKey.ScalarMultiplication(&srs.G1[0], privateKey)
+
+	publicKeyG2 := new(bn254.G2Affine)
+	publicKeyG2.ScalarMultiplication(&srs.G2[0], privateKey)
 
 	pubKeyProof := new(KeyPairProof)
 	pubKeyProof.PrivateKey = proof.ClaimedValue
 	pubKeyProof.H = proof.H
-	pubKeyProof.PublicKeyG1Jac = *publicKey
+	pubKeyProof.PublicKeyG1Aff = *publicKey
+	pubKeyProof.PublicKeyG2Aff = *publicKeyG2
 	return commitment, pubKeyProof
 }
 
@@ -69,22 +72,24 @@ func VerifyPubKey(commitment *kzg.Digest, proof *KeyPairProof, srs *kzg.SRS) err
 	var point fr.Element
 	point.SetInt64(0)
 	// [f(a)]G₁
-	// var claimedValueG1Aff bls12381.G1Jac
+	// var claimedValueG1Aff bn254.G1Jac
 	// var claimedValueBigInt big.Int
 	// proof.ClaimedValue.BigInt(&claimedValueBigInt)
 	// claimedValueG1Aff.ScalarMultiplicationAffine(&srs.G1[0], &claimedValueBigInt)
 
 	// [f(α) - f(a)]G₁
-	var fminusfaG1Jac bls12381.G1Jac
+	var fminusfaG1Jac bn254.G1Jac
 	fminusfaG1Jac.FromAffine(commitment)
-	fminusfaG1Jac.SubAssign(&proof.PublicKeyG1Jac)
+	pubKeyJac := new(bn254.G1Jac)
+	pubKeyJac.FromAffine(&proof.PublicKeyG1Aff)
+	fminusfaG1Jac.SubAssign(pubKeyJac)
 
 	// [-H(α)]G₁
-	var negH bls12381.G1Affine
+	var negH bn254.G1Affine
 	negH.Neg(&proof.H)
 
 	// [α-a]G₂
-	var alphaMinusaG2Jac, genG2Jac, alphaG2Jac bls12381.G2Jac
+	var alphaMinusaG2Jac, genG2Jac, alphaG2Jac bn254.G2Jac
 	var pointBigInt big.Int
 	point.BigInt(&pointBigInt)
 	genG2Jac.FromAffine(&srs.G2[0])
@@ -94,17 +99,17 @@ func VerifyPubKey(commitment *kzg.Digest, proof *KeyPairProof, srs *kzg.SRS) err
 		AddAssign(&alphaG2Jac)
 
 	// [α-a]G₂
-	var xminusaG2Aff bls12381.G2Affine
+	var xminusaG2Aff bn254.G2Affine
 	xminusaG2Aff.FromJacobian(&alphaMinusaG2Jac)
 
 	// [f(α) - f(a)]G₁
-	var fminusfaG1Aff bls12381.G1Affine
+	var fminusfaG1Aff bn254.G1Affine
 	fminusfaG1Aff.FromJacobian(&fminusfaG1Jac)
 
 	// e([f(α) - f(a)]G₁, G₂).e([-H(α)]G₁, [α-a]G₂) ==? 1
-	check, err := bls12381.PairingCheck(
-		[]bls12381.G1Affine{fminusfaG1Aff, negH},
-		[]bls12381.G2Affine{srs.G2[0], xminusaG2Aff},
+	check, err := bn254.PairingCheck(
+		[]bn254.G1Affine{fminusfaG1Aff, negH},
+		[]bn254.G2Affine{srs.G2[0], xminusaG2Aff},
 	)
 	if err != nil {
 		return err

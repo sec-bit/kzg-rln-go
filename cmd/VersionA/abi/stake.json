@@ -1,0 +1,372 @@
+[
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "publicKeyHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "Deposit",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "publicKeyHash",
+          "type": "bytes32"
+        }
+      ],
+      "name": "Withdraw",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "DEPOSIT_AMOUNT",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "WAIT_TIME",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256[2]",
+              "name": "X",
+              "type": "uint256[2]"
+            },
+            {
+              "internalType": "uint256[2]",
+              "name": "Y",
+              "type": "uint256[2]"
+            }
+          ],
+          "internalType": "struct BN254HashToG1.G2Point",
+          "name": "publicKey",
+          "type": "tuple"
+        }
+      ],
+      "name": "deposit",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "data",
+          "type": "bytes"
+        }
+      ],
+      "name": "hashToPoint",
+      "outputs": [
+        {
+          "internalType": "uint256[2]",
+          "name": "result",
+          "type": "uint256[2]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "name": "publicKeys",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "exists",
+          "type": "bool"
+        },
+        {
+          "internalType": "uint256",
+          "name": "timestamp",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "X",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "Y",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct BN254HashToG1.G1Point",
+          "name": "point",
+          "type": "tuple"
+        },
+        {
+          "internalType": "uint256",
+          "name": "scalar",
+          "type": "uint256"
+        }
+      ],
+      "name": "scalarMul",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "X",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "Y",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct BN254HashToG1.G1Point",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "X",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "Y",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct BN254HashToG1.G1Point",
+          "name": "message",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint256[2]",
+              "name": "X",
+              "type": "uint256[2]"
+            },
+            {
+              "internalType": "uint256[2]",
+              "name": "Y",
+              "type": "uint256[2]"
+            }
+          ],
+          "internalType": "struct BN254HashToG1.G2Point",
+          "name": "pubKey",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "X",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "Y",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct BN254HashToG1.G1Point",
+          "name": "signature",
+          "type": "tuple"
+        }
+      ],
+      "name": "verify",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes",
+          "name": "message",
+          "type": "bytes"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint256[2]",
+              "name": "X",
+              "type": "uint256[2]"
+            },
+            {
+              "internalType": "uint256[2]",
+              "name": "Y",
+              "type": "uint256[2]"
+            }
+          ],
+          "internalType": "struct BN254HashToG1.G2Point",
+          "name": "pubKey",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "X",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "Y",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct BN254HashToG1.G1Point",
+          "name": "signature",
+          "type": "tuple"
+        }
+      ],
+      "name": "verifyMessage",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256[2]",
+              "name": "X",
+              "type": "uint256[2]"
+            },
+            {
+              "internalType": "uint256[2]",
+              "name": "Y",
+              "type": "uint256[2]"
+            }
+          ],
+          "internalType": "struct BN254HashToG1.G2Point",
+          "name": "publicKey",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "X",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "Y",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct BN254HashToG1.G1Point",
+          "name": "signature",
+          "type": "tuple"
+        }
+      ],
+      "name": "withdraw90Percent",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256[2]",
+              "name": "X",
+              "type": "uint256[2]"
+            },
+            {
+              "internalType": "uint256[2]",
+              "name": "Y",
+              "type": "uint256[2]"
+            }
+          ],
+          "internalType": "struct BN254HashToG1.G2Point",
+          "name": "publicKey",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "X",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "Y",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct BN254HashToG1.G1Point",
+          "name": "signature",
+          "type": "tuple"
+        }
+      ],
+      "name": "withdrawWaitFor1day",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ]

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/consensys/gnark-crypto/ecc/bls12-381/fr"
+	"github.com/consensys/gnark-crypto/ecc/bn254/fr"
 )
 
 func TestInterpolate(t *testing.T) {
