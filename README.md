@@ -2,6 +2,8 @@
 
 This repository contains a proof-of-concept implementation of RLN on KZG in Golang. The implementation is based on the research paper and discussion from [zkresearch](https://zkresear.ch/t/rln-on-kzg-polynomial-commitment-scheme-cross-posted/114) and the code reference from [Rate-Limiting-Nullifier/kzg-rln](https://github.com/Rate-Limiting-Nullifier/kzg-rln).
 
+Corresponding contract repo https://github.com/dynm/kzg-rln-contracts
+
 ## Getting Started
 
 Follow the instructions below to set up the project and run the provided example.
