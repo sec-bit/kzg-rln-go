@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Go WebAssembly Example</title>
+  <script src="wasm_exec.js"></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="top-bar">
+    <button id="connectWalletButton">Connect Wallet</button>
+    <span id="walletAddress" class="wallet-address"></span>
+  </div>
+  <div class="container">
+    <div class="panel">
+      <div class="tab">Server</div>
+      <textarea id="leftTextArea" placeholder="Type your text here for the Server panel..." readonly></textarea>
+    </div>
+    <div class="panel">
+      <div class="tab">Client</div>
+      <textarea id="rightTextArea" placeholder="Type your text here for the Client panel..." readonly></textarea>
+
+      <div class="input-grid">
+        <label for="commitment">Commitment:</label>
+        <input id="commitment" type="text" placeholder="Commitment" class="full-width-input">
+      </div>
+
+      <div class="input-grid">
+        <label for="keyProof">Key Proof:</label>
+        <input id="keyProof" type="text" placeholder="Key Proof" readonly class="full-width-input">
+      </div>
+
+      <div class="input-container">
+        <label for="coefficients">Coefficients:</label>
+        <input id="coefficients" type="text" placeholder="Enter coefficients...">
+        <button id="generatePolyButton">(1) Generate Polynomial</button>
+      </div>
+
+      <div class="half-width-buttons">
+        <button id="registerOnChainButton" disabled>Register On Chain</button>
+        <button id="registerOnServerButton" disabled>(2) Register On Server</button>
+      </div>
+
+      <div class="input-container">
+        <input id="messageInput" type="text" placeholder="Type your message here...">
+        <button id="sendButton">(3) 📤 Send</button>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>
