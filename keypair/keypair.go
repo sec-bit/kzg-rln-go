@@ -27,7 +27,7 @@ func pRandomPolynomial(size int) []fr.Element {
 
 type KeyPairProof struct {
 	H              bn254.G1Affine
-	PrivateKey     fr.Element
+	PrivateKey     *fr.Element
 	PublicKeyG1Aff bn254.G1Affine
 	PublicKeyG2Aff bn254.G2Affine
 }
@@ -60,7 +60,7 @@ func GenerateCommitmentAndKeyPairProof(poly []fr.Element, srs *kzg.SRS) (kzg.Dig
 	publicKeyG2.ScalarMultiplication(&srs.G2[0], privateKey)
 
 	pubKeyProof := new(KeyPairProof)
-	pubKeyProof.PrivateKey = proof.ClaimedValue
+	pubKeyProof.PrivateKey = &proof.ClaimedValue
 	pubKeyProof.H = proof.H
 	pubKeyProof.PublicKeyG1Aff = *publicKey
 	pubKeyProof.PublicKeyG2Aff = *publicKeyG2
