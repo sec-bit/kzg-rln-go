@@ -4,6 +4,9 @@ This repository contains a proof-of-concept implementation of RLN on KZG in Gola
 
 Corresponding contract repo https://github.com/dynm/kzg-rln-contracts
 
+## Online Demo
+https://secbit.io/kzg-rln-go/
+
 ## Getting Started
 
 Follow the instructions below to set up the project and run the provided example.
