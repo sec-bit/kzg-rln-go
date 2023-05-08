@@ -1,0 +1,95 @@
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    display: flex;
+    min-height: 90vh;
+}
+
+.panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.tab {
+    padding: 10px 0;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+textarea {
+    flex: 1;
+    resize: none;
+    box-sizing: border-box;
+}
+
+.input-container {
+    display: flex;
+    margin-top: 10px;
+    align-items: center;
+}
+
+.input-grid {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 10px;
+    margin-top: 10px;
+    align-items: center;
+}
+
+.full-width-input {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+#messageInput,
+#coefficients {
+    flex: 1;
+}
+
+button {
+    margin-left: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px;
+    background-color: #f0f0f0;
+}
+
+.wallet-address {
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.half-width-buttons {
+    display: flex;
+    width: 100%;
+    margin-top: 10px;
+    justify-content: space-between;
+}
+
+.half-width-buttons button {
+    flex: 1;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.half-width-buttons button:first-child {
+    margin-right: 5px;
+}
+
+.half-width-buttons button:last-child {
+    margin-left: 5px;
+}
