@@ -1,0 +1,31 @@
+name: Publish Web
+
+on:
+  push:
+    branches:
+      - main # Adjust this to the branch you want the action to run on
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: 1.19 # Adjust this to the Go version your project uses
+
+    - name: Build web folder
+      run: |
+        cd web
+        chmod +x build.sh
+        ./build.sh
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./web # Replace this with the output directory of your build.sh script
