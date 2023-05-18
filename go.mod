@@ -5,8 +5,10 @@ go 1.20
 require (
 	github.com/consensys/gnark v0.8.0
 	github.com/consensys/gnark-crypto v0.9.1
+	github.com/davecgh/go-spew v1.1.1
 	github.com/ethereum/go-ethereum v1.10.21
 	github.com/liyue201/gnark-circomlib v0.0.0-20221229085226-4cffd763e7ce
+	github.com/sashabaranov/go-openai v1.9.3
 	golang.org/x/crypto v0.6.0
 )
 
@@ -15,7 +17,6 @@ require (
 	github.com/blang/semver/v4 v4.0.0 // indirect
 	github.com/btcsuite/btcd/btcec/v2 v2.2.0 // indirect
 	github.com/consensys/bavard v0.1.13 // indirect
-	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/deckarep/golang-set v1.8.0 // indirect
 	github.com/decred/dcrd/dcrec/secp256k1/v4 v4.0.1 // indirect
 	github.com/fxamacker/cbor/v2 v2.4.0 // indirect

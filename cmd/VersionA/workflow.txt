@@ -1,0 +1,70 @@
+                               Treat or Be Slashed
+
+
+
+
+          +-------------+                                 +-----------+
+          |             |                                 |           |
+          |    User     |                                 |  Server   |
+          |             |                                 |           |
+          +------+------+                                 +-----+-----+
+                 | generate polynomial &                        |
+                 | derive public key (g^f(0))                   |
+                 | call StakeContract.deposit(public key)       |
+                 v                                              v
+          +------+------+    generate public key proof    +-----------+
+          |             |    & send to server             |           |
+          | StakeContract +------------------------------>|  Server   |
+          |             |                                 |           |
+          +------+------+                                 +-----+-----+
+                 ^                                              |
+                 |            check proof & deposit             |
+                 +----------------------------------------------+
+
+
+
+
+
+
+
+
+
+
+                        (if ok, user can send messages)
+          +-------------+       send message & proof    +-----------+
+          |             +------------------------------>|           |
+          |    User     |                               |  Server   |
+          |             |                               |           |
+          +-------------+                               +-----------+
+
+
+
+
+
+
+
+
+
+
+(if user sends messages exceeding the limit, server evaluate f(0), signs BLS signature)
+          +-------------+                               +-----------+
+          |             |                               |           |
+          |    User     |   interpolate opening proof   |  Server   |
+          |             |   points to recover polynomial|           |
+          +------+------+                               +-----+-----+
+                                                        
+                 (server evaluates f(0) to get the private key)
+
+          +-------------+                               +-----------+
+          |             |                               |           |
+          |    User     |       sign BLS signature      |  Server   |
+          |             |                               |           |
+          +-------------+                               +-----+-----+
+                                                        |
+  (server calls StakeContract.withdraw with public key & signature)
+                                                        v
+          +------+------+                               +-----------+
+          |             |                               |           |
+          | StakeContract <---------------------------- |  Server   |
+          |             |                               |           |
+          +------+------+                               +-----------+
